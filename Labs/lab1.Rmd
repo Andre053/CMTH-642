@@ -1,0 +1,98 @@
+---
+title: "lab1"
+output: html_document
+date: "2026-09-17"
+---
+
+# Overview
+
+1. Create a df of the Airquality dataset. Display names of the columns. Check data types of the attributes. Run a summary statistics of the dataset.
+
+2. Check the missing values in the dataset and display NAs per column
+
+3. Day and month are seen as integers. Make them factors. Check the data types of the attributes
+
+4. Calculate the mean of the non-missing values in the Ozone column. Replace the missing values with this mean. Do the same for Solar.R
+
+5. Use a histogram to assess normality of the Ozone variable. Does it appear to be normally distributed?
+
+6. Create a boxplot which shows the distribution of Ozone in each month. Use different colours for each month
+
+7. Create a scatter plot matrix of the numeric variables within the Airquality dataset
+
+# Solution
+
+## Load the libraries
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(janitor)
+```
+
+## Answer the questions
+
+1. Create a df of the Airquality dataset. Display names of the columns. Check data types of the attributes. Run a summary statistics of the dataset.
+```{r}
+head(airquality) # already available in R
+
+df <- airquality |> clean_names() # create df
+
+colnames(df) # display names
+
+str(df) # check data types of attributes with str()
+
+summary(df) # see summary stats of the df with summary()
+```
+
+2. Check the missing values in the dataset and display NAs per column
+```{r}
+df |> summarize(
+  across(everything(), ~ sum(is.na(.)))
+)
+```
+
+3. Day and month are seen as integers. Make them factors. Check the data types of the attributes
+```{r}
+# convert int to factor
+df$month <- as.factor(df$month)
+df$day <- as.factor(df$day)
+
+str(df)
+```
+
+4. Calculate the mean of the non-missing values in the Ozone column. Replace the missing values with this mean. Do the same for Solar.R
+```{r}
+oz_mean <- mean(df$ozone, na.rm = TRUE)
+
+# where oz is.na(), replace with oz_mean
+
+solar_mean <- mean(df$solar_r, na.rm = TRUE)
+```
+
+5. Use a histogram to assess normality of the Ozone variable. Does it appear to be normally distributed?
+```{r}
+df |>
+  select(ozone) |>
+  ggplot(aes(x=ozone)) +
+    geom_histogram()
+
+```
+
+6. Create a boxplot which shows the distribution of Ozone in each month. Use different colours for each month
+```{r}
+df |>
+  select(ozone, month) |>
+  ggplot(aes(x=ozone, y=month, fill=month)) +
+    geom_boxplot()
+```
+
+7. Create a scatter plot matrix of the numeric variables within the Airquality dataset
+```{r}
+df |>
+  select(ozone, solar_r, wind, temp) |>
+  ggplot() +
+    geom_point()
+```
+
+

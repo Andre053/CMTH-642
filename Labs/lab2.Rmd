@@ -1,0 +1,51 @@
+---
+title: "lab2"
+output: html_document
+---
+
+# Questions
+
+## Scenario A
+
+Study conducted to analyze monthly savings of 50 households in a certain city. Monthly savings measured in 100 randomly sampled households. Monthly savings (in dollars) are given. 
+
+1. Does the data follow a normal distribution? Check by plotting a histogram. Conduct a Shapiro Test to address the hypothesis
+
+2. Is there evidence that the mean monthly savings of households in this city is greater than $2750? Perform a one-sample t-test to address this hypothesis
+
+## Scenario B
+
+Study to evaluate the effect of a new medication on blood pressure. Measured systolic blood pressure of 40 patients before and after they took the medication. Data is paired, given as systolic blood pressure measurements before and after.
+
+1. Does the data follow a normal distribution? Check with a histogram
+
+2. Is there evidence that the new medication reduces systolic blood pressure?
+
+# Solution
+## Load the libraries
+```{r}
+library(tidyr)
+library(dplyr)
+library(janitor)
+```
+
+## Answer the questions
+
+
+### Scenario A
+
+Load the data
+```{r}
+hh_savings <- c(4695, 2651, 2299, 2940, 2789, 1916, 2824, 1998, 3153, 2984, 2425, 3150, 2653, 2586, 3484, 3755, 2998, 3852, 3167, 2622, 2448, 4031, 5000, 1951, 3466, 2268, 2770, 2666, 3363, 1620, 2612, 2955, 3268, 3288, 3554, 2864, 3092, 3183, 3384, 1566, 3511, 3140, 2371, 1802, 1645, 3748, 3704, 2067, 2604, 2308)
+```
+
+
+### Scenario B
+
+Load the data
+```{r}
+before_med <- c(140, 155, 148, 162, 173, 168, 158, 147, 152, 158, 167, 171, 179, 184, 188, 193, 198, 203, 208, 214, 142, 147, 152, 157, 162, 167, 172, 177, 182, 187, 157, 163, 168, 173, 178, 183, 188, 193, 198, 203)
+
+after_med <- c(130, 145, 138, 152, 163, 158, 148, 137, 142, 148, 157, 161, 169, 174, 178, 183, 188, 193, 198, 203, 132, 137, 142, 147, 152, 157, 162, 167, 172, 177, 147, 153, 158, 163, 168, 173, 178, 183, 188, 193)
+```
+

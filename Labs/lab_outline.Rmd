@@ -1,0 +1,14 @@
+---
+title: "lab_outline"
+output: html_document
+---
+
+# Questions
+
+# Solution
+## Load the libraries
+```{r}
+
+```
+
+## Answer the questions
